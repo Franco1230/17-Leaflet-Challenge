@@ -1,3 +1,5 @@
+# Markers: Please clone or download the repository and paste your own Mapbox token into the config.js before running the html.
+
 # Leaflet Homework - Visualising Data with Leaflet
 
 ## Background
