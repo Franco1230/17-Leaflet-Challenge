@@ -1,4 +1,4 @@
-## Markers: Please perform a `git clone` or download the repository and paste your own Mapbox token into the config.js before running the index.html file.
+# Markers: Please perform a `git clone` or download the repository and paste your own Mapbox token into the config.js before running the index.html file.
 
 # Leaflet Homework - Visualising Data with Leaflet
 
