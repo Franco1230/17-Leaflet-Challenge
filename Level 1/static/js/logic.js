@@ -21,7 +21,7 @@ lightMap.addTo(map);
 var earthquakes = new L.LayerGroup();
 
 
-var queryURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+var queryURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // retrieve earthquake geoJSON data.
 d3.json(queryURL, function(data) {
