@@ -1,5 +1,4 @@
-// Setting backgrounds of our map - tile layer:
-// grayscale background.
+// Setting backgrounds of our map.
 var lightMap = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
   maxZoom: 18,
@@ -8,24 +7,23 @@ var lightMap = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/
   zoomOffset: -1,
   accessToken: API_KEY});
 
-
-// map object to an array of layers we created.
+// Create map object.
 var map = L.map("map", {
   center: [25, 0],
   zoom: 2,
 });
 
-// adding 'graymap' tile layer to the map.
+// Set the map as default.
 lightMap.addTo(map);
 
+// Create a layer group made from the earthquake data
 var earthquakes = new L.LayerGroup();
 
 // Store the query URL to a variable
 var queryURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // retrieve earthquake geoJSON data.
-d3.json(queryURL, function(data) {
-  
+d3.json(queryURL, function(data) {  
   function styleInfo(feature) {
     return {
       opacity: 1,
@@ -38,7 +36,7 @@ d3.json(queryURL, function(data) {
     };
   }
 
-  // Define the color of the marker based on the magnitude of the earthquake.
+  // Set colors for the marker based on the magnitude.
   function getColor(magnitude) {
     switch (true) {
       case magnitude > 5:
@@ -56,7 +54,7 @@ d3.json(queryURL, function(data) {
     }
   }
 
-  // define the radius of the earthquake marker based on its magnitude.
+  // Set size of each marker based on its magnitude.
   function getRadius(magnitude) {
     if (magnitude === 0) {
       return 1;
@@ -65,7 +63,7 @@ d3.json(queryURL, function(data) {
     return magnitude * 3;
   }
 
-  // add GeoJSON layer to the map
+  // Add GeoJSON layer to the map.
   L.geoJson(data, {
     pointToLayer: function(feature, latlng) {
       return L.circleMarker(latlng);
@@ -79,11 +77,10 @@ d3.json(queryURL, function(data) {
 
   earthquakes.addTo(map);
 
-  // Creating Legend Layer
+  // Creating Legend.
   var legend = L.control({
     position: "bottomright"
   });
-
 
   legend.onAdd = function() {
     var div = L
@@ -99,7 +96,6 @@ d3.json(queryURL, function(data) {
       "#ff7300",
       "#ff0000"
      ];
-
 
     for (var i = 0; i < grades.length; i++) {
       div.innerHTML += "<i style='background: " + colors[i] + "'></i> " +

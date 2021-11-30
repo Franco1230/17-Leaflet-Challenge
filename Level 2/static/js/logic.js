@@ -1,4 +1,4 @@
-// Selectable backgrounds of our map.
+// Setting backgrounds of our map.
 var lightMap = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
   maxZoom: 18,
@@ -34,7 +34,7 @@ var satelliteMap = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/
   accessToken: API_KEY
 });
 
-// Create the map object.
+// Create map object.
 var map = L.map("map", {
   center: [25, 0],
   zoom: 2,
@@ -67,10 +67,10 @@ L.control.layers(baseMaps, overlayMaps,{
 
 // Store the query URL to a variable
 var queryURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+var tectonicURL = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json";
 
 // Perform an API call to the USGS API to get earthquake information.
 d3.json(queryURL, function(data) {
-
   function styleInfo(feature) {
     return {
       opacity: 1,
@@ -129,7 +129,6 @@ d3.json(queryURL, function(data) {
     position: "bottomright"
   });
 
-
   legend.onAdd = function() {
     var div = L
       .DomUtil
@@ -145,7 +144,6 @@ d3.json(queryURL, function(data) {
       "#ff0000"
      ];
 
-
     for (var i = 0; i < grades.length; i++) {
       div.innerHTML += "<i style='background: " + colors[i] + "'></i> " +
         grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
@@ -156,17 +154,16 @@ d3.json(queryURL, function(data) {
   // Adding Legend to the map
   legend.addTo(map);
 
-  // retrive Tectonic Plate geoJSON data.
-  d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json",
-    function(platedata) {
- 
+  // Query for Tectonic Plate.
+  d3.json(tectonicURL, function(platedata) { 
       L.geoJson(platedata, {
         color: "blue",
         weight: 2
       })
       .addTo(tectonicplates);
 
-      // add the tectonicplates layer to the map.
+      // Add the tectonicplates layer to the map.
       tectonicplates.addTo(map);
     });
+
 });
