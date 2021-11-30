@@ -20,13 +20,12 @@ lightMap.addTo(map);
 
 var earthquakes = new L.LayerGroup();
 
-
+// Store the query URL to a variable
 var queryURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // retrieve earthquake geoJSON data.
 d3.json(queryURL, function(data) {
-
-
+  
   function styleInfo(feature) {
     return {
       opacity: 1,
@@ -43,17 +42,17 @@ d3.json(queryURL, function(data) {
   function getColor(magnitude) {
     switch (true) {
       case magnitude > 5:
-        return "#f06b6b";
+        return "#ff0000";
       case magnitude > 4:
-        return "#f0a76b";
+        return "#ff7300";
       case magnitude > 3:
-        return "#f3ba4d";
+        return "#ffa800";
       case magnitude > 2:
-        return "#f3db4d";
+        return "#ffd900";
       case magnitude > 1:
-        return "#e1f34d";
+        return "#e3ff00";
       default:
-        return "#b7f34d";
+        return "#a3ff00";
     }
   }
 
@@ -93,12 +92,12 @@ d3.json(queryURL, function(data) {
    
     var grades = [0, 1, 2, 3, 4, 5];
     var colors = [
-      "#b7f34d",
-      "#e1f34d",
-      "#f3db4d",
-      "#f3ba4d",
-      "#f0a76b",
-      "#f06b6b"
+      "#a3ff00",
+      "#e3ff00",
+      "#ffd900",
+      "#ffa800",
+      "#ff7300",
+      "#ff0000"
      ];
 
 
