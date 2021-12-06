@@ -1,4 +1,5 @@
 # Markers: Please perform a `git clone` or download the repository and paste your own Mapbox token into the config.js before running the index.html file.
+## you may also need to start up a local server by typing `python -m http.server` in a terminal.
 
 # Leaflet Homework - Visualising Data with Leaflet
 
